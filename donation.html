@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CrowdFunding</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+<div class="inner-header">
+    <div class="inner">
+        <div class="inner-header-name">CrowdFunding System</div>
+        <div class="inner-nav">
+            <a class="inner-nav-item" href="./index.html">Home</a>
+            <a class="inner-nav-item" href="./fundraiser-list.html">Fundraiser List</a>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="detail">
+        <div style="text-align: center" class="list-item">
+            <div class="item-header">
+                <div id="category-name" class="category"></div>
+                <div id="header-title" class="caption"></div>
+            </div>
+            <div class="item-content">
+                <div class="author-info">
+                    <div class="organizer" id="organizer"></div>
+                    （<div id="city" class="city"></div>）
+                </div>
+            </div>
+            <div class="donation-wrapper">
+                <input type="text" placeholder="Please enter the amount" id="donation-value">
+                <input type="text" placeholder="Please enter the giver" id="giver-value">
+            </div>
+            <div class="operate-btns">
+                <button onclick="donation()">DONATION</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="./js/ajax.js"></script>
+<script>
+    let detailInfo;
+    window.onload = function() {
+        getDetail();
+    }
+    // get detail by fundraiser id
+    function getDetail() {
+        const id = location.search.split('=')[1];
+        getService('api/getDetail', {
+            FUNDRAISER_ID: id
+        }).then(res => {
+            detailInfo = res;
+            // render data
+            const oHeaderTitle = document.getElementById('header-title');
+            oHeaderTitle.innerText = detailInfo.CAPTION;
+            const oOrganizer = document.getElementById('organizer');
+            oOrganizer.innerText = detailInfo.ORGANIZER;
+            const oCategoryName = document.getElementById('category-name');
+            oCategoryName.innerText = detailInfo.CATEGORY_NAME;
+            const oCity = document.getElementById('city');
+            oCity.innerText = detailInfo.CITY;
+        });
+    }
+    function donation() {
+        const value = document.getElementById('donation-value').value;
+        const giver = document.getElementById('giver-value').value;
+        if (!value) {
+            alert('Please enter the amount');
+            return;
+        }
+        postService('api/donation', {
+            amount: value,
+            giver: giver,
+            fundraiser_id: detailInfo.FUNDRAISER_ID
+        }).then(res => {
+            alert('Successful donation of $' + value);
+            history.back();
+        });
+    }
+</script>
+</html>
