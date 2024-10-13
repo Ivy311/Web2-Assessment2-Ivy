@@ -1,0 +1,36 @@
+<div class="padding-30">
+  <div class="detail">
+    <div style="text-align: center" class="list-item">
+      <div class="item-header">
+        <div id="category-name" class="category">{{detailInfo.CATEGORY_NAME}}</div>
+        <div id="header-title" class="caption">{{detailInfo.CAPTION}}</div>
+      </div>
+      <div class="item-content">
+        <div class="money">
+          <div class="current" id="current-funding">{{detailInfo.CURRENT_FUNDING}}</div> =>
+          <div class="target" id="target-funding">{{detailInfo.TARGET_FUNDING}}</div>
+        </div>
+        <div class="author-info">
+          <div class="organizer" id="organizer">{{detailInfo.ORGANIZER}}</div>
+          （<div id="city" class="city">{{detailInfo.CITY}}</div>）
+        </div>
+      </div>
+      <div class="operate-btns">
+        <button (click)="donation()">DONATION</button>
+      </div>
+      <div class="donation-list">
+        <div class="donation-title">Donation List</div>
+        <div id="donation-list">
+          <div class="donation-item" *ngFor="let item of detailInfo.donationList">
+            <div><span class="donation-label">Giver</span>：{{item.GIVER}}</div>
+            <div><span class="donation-label">Amount</span>：<span class="amount">{{item.AMOUNT}}</span><span class="unit">AUD</span></div>
+            <div><span class="donation-label">Date</span>：{{item.DATE}}</div>
+          </div>
+          <div *ngIf="!detailInfo.donationList.length">
+            NO DATA
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="padding-30">
+  <div class="detail">
+    <div style="text-align: center" class="list-item">
+      <div class="item-header">
+        <div id="category-name" class="category">{{detailInfo.CATEGORY_NAME}}</div>
+        <div id="header-title" class="caption">{{detailInfo.CAPTION}}</div>
+      </div>
+      <div class="item-content">
+        <div class="money">
+          <div class="current" id="current-funding">{{detailInfo.CURRENT_FUNDING}}</div> =>
+          <div class="target" id="target-funding">{{detailInfo.TARGET_FUNDING}}</div>
+        </div>
+        <div class="author-info">
+          <div class="organizer" id="organizer">{{detailInfo.ORGANIZER}}</div>
+          （<div id="city" class="city">{{detailInfo.CITY}}</div>）
+        </div>
+      </div>
+      <div class="donation-wrapper">
+        <div>
+          <mat-form-field style="width: 400px;">
+            <mat-label>Amount</mat-label>
+            <input matInput [(ngModel)]="amount" placeholder="Please enter the amount" >
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field style="width: 400px;">
+            <mat-label>Giver</mat-label>
+            <input matInput [(ngModel)]="giver" placeholder="Please enter the giver" >
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="donation-btn">
+        <button (click)="donation()">DONATION</button>
+      </div>
+    </div>
+  </div>
+</div>

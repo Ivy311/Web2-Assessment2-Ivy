@@ -1,0 +1,53 @@
+<main>
+  <button (click)="goBack()">Back</button>
+
+  <div class="form-wrapper">
+    <div style="margin-top: 20px;">
+      <mat-form-field style="width: 700px">
+        <mat-label>Caption</mat-label>
+        <input matInput [(ngModel)]="caption" required (blur)="validCaptionHandler()">
+        <div *ngIf="!captionValid" class="error-tip">please enter caption</div>
+      </mat-form-field>
+    </div>
+    <div style="margin-top: 20px;">
+      <mat-form-field style="width: 700px">
+        <mat-label>Organizer</mat-label>
+        <input matInput [(ngModel)]="organizer" (blur)="validOrganizerHandler()">
+        <div *ngIf="!organizerValid" class="error-tip">please enter organizer</div>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field style="width: 700px">
+        <mat-label>CATEGORY</mat-label>
+        <mat-select [(ngModel)]="category" placeholder="please select">
+          <mat-option *ngFor="let option of categoryOptions" [value]="option.CATEGORY_ID">{{option.NAME}}</mat-option>
+        </mat-select>
+        <div *ngIf="!categoryValid" class="error-tip">please select category</div>
+      </mat-form-field>
+    </div>
+    <div style="margin-top: 20px;">
+      <mat-form-field style="width: 700px">
+        <mat-label>City</mat-label>
+        <input matInput [(ngModel)]="city" (blur)="validCityHandler()">
+        <div *ngIf="!cityValid" class="error-tip">please enter city</div>
+      </mat-form-field>
+    </div>
+    <div style="margin-top: 20px;">
+      <mat-form-field style="width: 700px">
+        <mat-label>Target Funding</mat-label>
+        <input matInput [(ngModel)]="target" (blur)="validTargetHandler()">
+        <div *ngIf="!targetValid" class="error-tip">please enter Target Funding</div>
+        <div *ngIf="targetValid && !targetNumValid" class="error-tip">Please enter a number greater than 0</div>
+      </mat-form-field>
+    </div>
+    <div style="margin-top: 20px;">
+      <mat-form-field style="width: 700px">
+        <mat-label>Active</mat-label>
+        <mat-select [(ngModel)]="active" placeholder="please select">
+          <mat-option *ngFor="let option of activeOptions" [value]="option.value">{{option.label}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <button (click)="saveHandler()">Save</button>
+  </div>
+</main>

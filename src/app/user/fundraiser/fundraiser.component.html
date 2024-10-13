@@ -1,0 +1,55 @@
+<div class="padding-30">
+  <div class="filter-wrapper">
+    <div class="filter-item">
+      <mat-form-field>
+        <mat-label>CATEGORY</mat-label>
+        <mat-select [(ngModel)]="category" placeholder="please select">
+          <mat-option *ngFor="let option of categoryOptions" [value]="option.CATEGORY_ID">{{option.NAME}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="filter-item">
+      <mat-form-field>
+        <mat-label>ORGANIZER</mat-label>
+        <mat-select [(ngModel)]="organizer" placeholder="please select">
+          <mat-option *ngFor="let option of organizerOptions" [value]="option.ORGANIZER">{{option.ORGANIZER}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="filter-item">
+      <mat-form-field>
+        <mat-label>CITY</mat-label>
+        <mat-select [(ngModel)]="city" placeholder="please select">
+          <mat-option *ngFor="let option of cityOptions" [value]="option.CITY">{{option.CITY}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="filter-item">
+      <button (click)="getFundraiserList()">SEARCH</button>
+      <button (click)="resetData()">RESET</button>
+    </div>
+  </div>
+  <div id="list-wrapper">
+    <div class="list-item" *ngFor="let item of dataList">
+      <div (click)="goDetail(item)">
+        <div class="item-header">
+          <div class="category">{{item.CATEGORY_NAME}}</div>
+          <div class="caption">{{item.CAPTION}}</div>
+        </div>
+        <div class="item-content">
+          <div class="money">
+            <div class="current">{{item.CURRENT_FUNDING}}<span class="unit">AUD</span></div> =>
+            <div class="target">{{item.TARGET_FUNDING}}<span class="unit">AUD</span></div>
+          </div>
+          <div class="author-info">
+            <div class="organizer">{{item.ORGANIZER}}</div>
+            <div class="city">（{{item.CITY}}）</div>
+          </div>
+        </div>
+      </div>
+      <div class="operate-btns">
+        <button (click)="donation(item)">DONATION</button>
+      </div>
+    </div>
+  </div>
+</div>
